@@ -1,0 +1,6 @@
+html, body{
+  box-sizing: border-box;
+  margin: 0;
+  background: linear-gradient(rgb(239, 250, 253), white) fixed;
+  min-height: 100%;
+}
