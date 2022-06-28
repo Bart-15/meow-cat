@@ -4,7 +4,6 @@ import {Box, TextField} from '@mui/material';
 export const NavContainer = styled(Box)`
   height:88px;
   background:#fff;
-  width: 100vw;
   color:#111;
 
   
@@ -37,7 +36,7 @@ export const Logo = styled(Box)`
 
 
 export const StyledTextField = styled(TextField)({
-    margin:'15px 20px 0 !important',
+    margin:'15px 0 !important',
     fontSize:'14px',
 
     '& label.Mui-focused': {

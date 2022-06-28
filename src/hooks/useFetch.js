@@ -1,34 +1,97 @@
 import {useState, useEffect} from 'react';
+import useDebounce from './useDebounce'
 import * as cat from '../api/cat';
+
+
 
 const useFetch = () => {
     const [data, setData] = useState([]);
     const [error, setErrors] = useState(null);
-    const [isLoading, setLoading] = useState(null)
-
-    const url = process.env.BASE_URL;
+    const [isLoading, setLoading] = useState(false);
+    const [query, setQuery] = useState('');
+    const debounceQuery = useDebounce(query, 1000)
+    const [queryResult, setQueryResult] = useState([]);
     
-    const fetchData = async (url) => {
+    
+    
+    const url = process.env.REACT_APP_BASE_URL;
+
+    // fetch all cat breeds
+    const fetchData = async () => {
+        setLoading(true);
         try {
-            const res = await cat.getByBreeds(url);
+            const res = await cat.getByBreeds(`${url}/breeds`);
 
             if(res.status === 500) {
                 return setErrors({message: "Check internet connection"});
             }
 
             setData(res.data);
+            setLoading(false)
+
         }catch(e) {
             setErrors(e.message);
         }
     }
 
     useEffect(() => {
-        fetchData(url);
+        fetchData();
     },  [])
+    
+    
+    // searchQuery {todo: 'implement debounce :)'}
+    const fetchQuery = async () => {
+        try {
+
+            const res = await cat.getByBreeds(`${url}/breeds/search?q=${debounceQuery}`);
+
+            if(res.status === 500) {
+                return setErrors({message: "Check internet connection"});
+            }
+
+            setQueryResult(res.data);
+            console.log(res.data)
+        }catch(e) {
+            console.log(e.message)
+        }
+    }
+
+    useEffect(() => {
+        if(debounceQuery.length > 2) {
+            fetchQuery();
+         } 
+    }, [debounceQuery])
+    
+
+    // searchCat
+    const searchCat = async (e, v) => {
+       setLoading(true)
+       const value = v ? v.name.toLowerCase() : "";
+       
+       try {
+
+        if(!value) {
+            return fetchData();
+        }
+
+        const res = await cat.getByBreeds(`${url}/breeds/search?q=${value}`);
+
+        setData(res.data);
+        setLoading(false)
+       }catch(e) {
+        console.log(e.message)
+       }
+    }
 
     return {
-        //some data
+       data,
+       error,
+       isLoading,
+       query,
+       setQuery,
+       searchCat,
+       queryResult
     }
 }
 
-export default useEffect;
+export default useFetch;
