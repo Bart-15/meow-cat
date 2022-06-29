@@ -4,7 +4,7 @@ import {NavContainer, LogoContainer, LinksContainer, StyledTextField, Logo} from
 import logo from '../../assets/images/logo-small.png'
 
   
-const SearchBar = ({query, setQuery,queryResult, searchCat}) => {
+const SearchBar = ({query, setQuery, queryResult, searchCat}) => {
   return (
     <>
       <NavContainer>

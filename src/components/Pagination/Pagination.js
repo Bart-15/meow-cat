@@ -1,27 +1,23 @@
 import React from 'react';
-import {Grid} from '@mui/material';
+import {Grid, Box, Pagination as CatPagination} from '@mui/material';
 
-const Pagination = ({catsPerPage, totalCats, changePage}) => {
-  let pageNumbers = [];
-
-  for(let i = 1; i < Math.ceil(totalCats / catsPerPage); i++) {
-    pageNumbers.push(i);
-  } 
-
-
+const Pagination = ({count, page, changePage}) => {
   return (
     <Grid container>
       <Grid item>
-       <ul>
-        {
-          pageNumbers.map((item, i) => {
-            return (<li key={item} onClick={() => changePage(item)}>{item}</li>)
-          })
-        }
-       </ul>
+      <Box p="5">
+        <CatPagination
+          count={count}
+          size="large"
+          page={page}
+          variant="outlined"
+          shape="rounded"
+          onChange={changePage}
+        />
+        </Box>
       </Grid>
     </Grid>
   )
 }
 
-export default Pagination
+export default Pagination;

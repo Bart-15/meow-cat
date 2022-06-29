@@ -1,18 +1,17 @@
 import {useState, useEffect} from 'react';
 import useDebounce from './useDebounce'
 import * as cat from '../api/cat';
-
-
+import { useNavigate } from "react-router-dom";
 
 const useFetch = () => {
+    const navigate = useNavigate();
+
     const [data, setData] = useState([]);
     const [error, setErrors] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [query, setQuery] = useState('');
     const debounceQuery = useDebounce(query, 1000)
     const [queryResult, setQueryResult] = useState([]);
-    
-    
     
     const url = process.env.REACT_APP_BASE_URL;
 
@@ -65,19 +64,18 @@ const useFetch = () => {
 
     // searchCat
     const searchCat = async (e, v) => {
-       setLoading(true)
        const value = v ? v.name.toLowerCase() : "";
-       
+        
        try {
 
-        if(!value) {
-            return fetchData();
-        }
+        // if(!value) {
+        //     return fetchData();
+        // }
 
-        const res = await cat.getByBreeds(`${url}/breeds/search?q=${value}`);
+        // const res = await cat.getByBreeds(`${url}/breeds/search?q=${value}&limit=100`);
+        // console.log("####data", res.data)
 
-        setData(res.data);
-        setLoading(false)
+       return navigate("./cat")
        }catch(e) {
         console.log(e.message)
        }
@@ -90,7 +88,8 @@ const useFetch = () => {
        query,
        setQuery,
        searchCat,
-       queryResult
+       queryResult,
+       setLoading
     }
 }
 

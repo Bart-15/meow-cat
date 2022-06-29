@@ -6,26 +6,38 @@ import Pagination from '../components/Pagination/Pagination'
 import CardSekeleton from '../components/Cats/CardSekeleton';
 import CardCats from '../components/Cats/CardCats';
 import useFetch from '../hooks/useFetch';
+import usePagination from '../hooks/usePagination';
 const Search = () => {
 
-  const {data, query, setQuery, queryResult, isLoading, searchCat} = useFetch();
+  const {data, query, setQuery, queryResult, isLoading, setLoading, searchCat} = useFetch();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [catsPerPage, setCatsPerPage] = useState(10);
-  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const PER_PAGE = 10;
 
-  const changePage = (value) => {
-    setCurrentPage(value)
+  const count = Math.ceil(data.length / PER_PAGE);
+  const _DATA = usePagination(data, PER_PAGE)
+
+
+  const changePage = (e, p) => {
+    setLoading(true);
+    setPage(p);
+    setTimeout(() => {
+      _DATA.jump(p);
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      })
+      setLoading(false);
+    }, 1000)
   } 
 
   // get current posts
   // custom pagination
-  const lastIndex = currentPage * catsPerPage;
-  const firstIndex = lastIndex - catsPerPage;
-  const newCats = data.slice(firstIndex, lastIndex);
-
-
-
+  // console.log("######", data)
+  // const lastIndex = currentPage * catsPerPage ;
+  // const firstIndex = lastIndex - catsPerPage;
+  // const newCats = data?.slice(firstIndex, lastIndex);         
+  
   return (
     <>
       <SearchBar
@@ -35,14 +47,14 @@ const Search = () => {
         searchCat={searchCat}
       />
       <Container>
-        {(data === undefined || isLoading) ? (<CardSekeleton cards={6} />) : (
+        {(_DATA.currentData() < 0 || isLoading) ? (<CardSekeleton cards={6} />) : (
           <CatContainer>
             <Grid container spacing={2}>
-              {newCats.map((item) =>  (<CardCats result={item} />))}
+              {_DATA.currentData().map((item, index) => (<CardCats result={item} key={item.key} />))}
             </Grid>
           </CatContainer>
         )}
-        <Pagination catsPerPage={catsPerPage} totalCats={data.length} changePage={changePage}/>
+        <Pagination page={page} count={count} changePage={changePage}/>
       </Container>
     </>
   )
