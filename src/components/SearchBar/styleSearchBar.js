@@ -5,8 +5,6 @@ export const NavContainer = styled(Box)`
   height:88px;
   background:#fff;
   color:#111;
-
-  
 `
 export const LinksContainer = styled(Box)`
   position:relative;
@@ -23,7 +21,6 @@ export const LogoContainer = styled(Box)`
   display:flex;
   justify-content:start;
   align-items:center;
-
 `
 
 export const Logo = styled(Box)`

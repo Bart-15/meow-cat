@@ -1,5 +1,5 @@
 import React from 'react'
-import { CatContainer, CatName, StyledCard, Content, Description } from './styledCats';
+import { CatContainer, CatName, StyledCard, Content, Description } from '../Cats/styledCats';
 import defaultImg from '../../assets/images/4-11.jpg'
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

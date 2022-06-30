@@ -3,7 +3,6 @@ import {Stack, Autocomplete } from '@mui/material';
 import {NavContainer, LogoContainer, LinksContainer, StyledTextField, Logo} from './styleSearchBar';
 import logo from '../../assets/images/logo-small.png'
 
-  
 const SearchBar = ({query, setQuery, queryResult, searchCat}) => {
   return (
     <>
