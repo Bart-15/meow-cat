@@ -1,5 +1,6 @@
-import {styled, Typography} from '@mui/material';
-import {Container, Box, CardMedia} from '@mui/material';
+import { Typography, styled} from '@mui/material';
+// import { styled } from '@mui/styles';
+import {Container, Box, CardMedia, Button} from '@mui/material';
 
 
 export const StyledContainer = styled(Container)`
@@ -7,6 +8,9 @@ export const StyledContainer = styled(Container)`
 `
 export const StyledBox = styled(Box)`
   padding:20px 50px;
+`
+export const CatContainer = styled(Container)`
+
 `
 
 export const CatName = styled(Typography)`
@@ -27,10 +31,24 @@ export const StyledText = styled(Typography)`
   font-size:18px;
 `
 
-export const CarousellWrapper = styled(Container)`
-  padding:0 40px;
-`
-
 export const CatImage = styled(CardMedia)`
   width:50%;
+`
+
+export const GoBack = styled(Button)`
+  margin:0 77px;
+  font-family:'Source Sans Pro', sans-serif;
+  padding:10px 20px;
+  font-size:16px;
+  font-weight:bold;
+  border:1px solid #e63e15;
+  color:#333;
+
+  &:hover {
+    color:#fff;
+    background:#e63e15;
+  }
+
+
+  
 `

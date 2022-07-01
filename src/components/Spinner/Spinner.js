@@ -12,7 +12,7 @@ function Spinner() {
     <SpinnerContainer>
         <Grid container direction="column" justifyContent="center" alignItems="center">
             <Grid item>
-                <TailSpin color='#333' height={80} width={80} />
+                <TailSpin color='#1aa3ed' height={200} width={100} />
             </Grid>
         </Grid>
     </SpinnerContainer>

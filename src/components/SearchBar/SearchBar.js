@@ -1,7 +1,7 @@
 import React from 'react'
-import {Stack, Autocomplete } from '@mui/material';
+import {Stack, Autocomplete} from '@mui/material';
 import {NavContainer, LogoContainer, LinksContainer, StyledTextField, Logo} from './styleSearchBar';
-import logo from '../../assets/images/logo-small.png'
+import logo from '../../assets/images/logo-small.png';
 
 const SearchBar = ({query, setQuery, queryResult, searchCat}) => {
   return (
@@ -15,8 +15,9 @@ const SearchBar = ({query, setQuery, queryResult, searchCat}) => {
             />
           </LogoContainer>
           <Stack spacing={2} >
-          <Autocomplete
+          <Autocomplete 
             id="free-solo-demo"
+            loading={query.length > 2 ? true : false}
             freeSolo
             sx={{ width: 200}}
             options={queryResult}
