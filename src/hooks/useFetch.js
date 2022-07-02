@@ -19,7 +19,7 @@ const useFetch = (url) => {
             }
       
             if(res.data.length === 0 ){
-                errors.message = "Cat not found."
+                errors.message = "Data not available right now."
                 setErrors(errors)
             }
       
@@ -41,7 +41,8 @@ const useFetch = (url) => {
        data,
        errors,
        isLoading,
-       setLoading
+       setLoading,
+       setData
     }
 }
 

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {useParams, Link} from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
 import axios from 'axios';
-import {StyledContainer, StyledBox, CatName, CatDescription, StyledText, CatImage, GoBack, CatContainer} from './styledCatItem';
-import {Grid, Box, Typography, CircularProgress, Container} from '@mui/material';
+import {Grid, Box, Typography, CircularProgress, Container, CardMedia, Button} from '@mui/material';
 import Spinner from '../../Spinner/Spinner';
-
+import useStyles from './styles';
 
 const CatItem = () => {
+  const classes = useStyles();
   const {id} = useParams();
   const lowercase = id.toLocaleLowerCase()
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -61,39 +61,38 @@ const CatItem = () => {
     const data = cats.cats;
     return (
      <>
-       <StyledBox component="div" >
+       <Box component="div" >
        {imgLoading ? (<ImgProgress />) : (
-         <CatImage 
+         <CardMedia
+           className={classes.cardMedia} 
            alt={data.name}
            component="img"
            src={image}
          />
        )}
-       <CatName variant="h2">{data.name}</CatName>
-       <CatDescription variant="subtitle1">{data.description}</CatDescription>
-       <StyledText variant="subtitle1">Origin: {data.origin}</StyledText>
-       <StyledText variant="p">Life span: {data.life_span}yrs.</StyledText>
-       <StyledText variant="subtitle1">Temperament: {data.temperament}</StyledText>
-       </StyledBox>
+       <Typography variant="h2" className={classes.title}>{data.name}</Typography>
+       <Typography className={classes.text} variant="subtitle1">{data.description}</Typography>
+       <Typography className={classes.text} variant="subtitle1">Origin: {data.origin}</Typography>
+       <Typography className={classes.text} variant="subtitle1">Life span: {data.life_span}yrs.</Typography>
+       <Typography className={classes.text} variant="subtitle1">Temperament: {data.temperament}</Typography>
+       </Box>
        </>
     )
   }
 
   return (
-    <StyledContainer>
-      <Container>
+    <Box>
+      <Container className={classes.rootContainer}>
         <Link to="/search" style={{textDecoration:'none'}}>
-          <GoBack>Go Back</GoBack>
+          <Button className={classes.backBtn}>Go Back</Button>
        </Link>
-      <CatContainer>
-        <Grid container direction="column" justifyContent="center" alignItems="center" style={{overflowX: "hidden !important"}}>
+        <Grid container direction="column" justifyContent="start" alignItems="start" style={{overflowX: "hidden !important"}}>
               {data.length > 0 && (<Grid item>{!isLoading && data?.map((item, idx) => (<Cats cats={item} key={idx} />))}</Grid>)}
               {isLoading && (<Spinner />)}
               {(!isLoading && errors.message) && (<Typography variant="h3">{errors.message}</Typography>)}
-        </Grid>         
-      </CatContainer>  
+        </Grid>          
       </Container>
-    </StyledContainer>
+    </Box>
   )
 }
 

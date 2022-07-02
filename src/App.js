@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Search from '../src/pages/Search';
 import LandingPage from '../src/pages/Landingpage';
 import CatItem from '../src/components/Cats/CatItem/CatItem'
-import {CssBaseline} from '@mui/material';
+import {CssBaseline, Paper} from '@mui/material';
 
 function App() {
   return (

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import * as api from '../api/cat';
-import {Container, debounce, Grid, Typography} from '@mui/material';
-import {CatContainer} from '../components/Cats/styledCats';
+import {Container, Grid, Typography} from '@mui/material';
 import Pagination from '../components/Pagination/Pagination'
 import CardSekeleton from '../components/Skeletons/CardSekeleton';
 import CardCats from '../components/Cats/CardCats';
@@ -10,8 +9,9 @@ import useFetch from '../hooks/useFetch';
 import useDebounce from '../hooks/useDebounce';
 import usePagination from '../hooks/usePagination';
 import SearchBar from '../components/SearchBar/SearchBar';
-
+import useStyles from '../components/Cats/styles';
 const Search = () => {
+  const classes = useStyles();
   const navigate = useNavigate();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const {data, isLoading, setLoading, errors} = useFetch(`${BASE_URL}/breeds`);
@@ -78,11 +78,11 @@ const Search = () => {
       />
       <Container>
         {(_DATA.currentData() > 0 || isLoading) ? (<CardSekeleton cards={6} />) : (
-          <CatContainer>
+          <Container className={classes.cardContainer}>
             <Grid container spacing={2}>
               {_DATA.currentData().map((item, index) => (<CardCats result={item} key={item.key} />))}
             </Grid>
-          </CatContainer>
+          </Container>
         )}
         {(_DATA.currentData().length < 0 && !isLoading) && (<Typography>Data not available.</Typography>)}
         <Pagination page={page} count={count} changePage={changePage}/>

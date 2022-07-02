@@ -1,15 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { StyledEngineProvider } from '@mui/material/styles';
-import './index.css';
 import App from './App';
+import {
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 
+
+
+const theme = createTheme({
+  pallete : {
+    light:'#fff',
+    muted:'#333',
+    danger:'#e63e15',
+  },
+  typography: {
+    "fontFamily": `'Open Sans', sans-serif`,
+    "fontSize": 12,
+    "fontWeightLight": 300,
+    "fontWeightRegular": 400,
+    "fontWeightMedium": 500,
+    subtitle1: {
+      fontSize: 12,
+      
+    },
+  }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </StyledEngineProvider>
   </React.StrictMode>
 );

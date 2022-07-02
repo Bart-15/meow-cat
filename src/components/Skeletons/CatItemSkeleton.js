@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import {StyledContainer, StyledBox, CatName, CatDescription, StyledText, CatImage} from '../Cats/CatItem/styledCatItem';
+import {StyledContainer, StyledBox, CatName, CatDescription, StyledText, CatImage} from '../Cats/CatItem/styles';
 
 import {Paper, CardMedia, Typography, Grid, Box, formControlClasses} from '@mui/material';
 
