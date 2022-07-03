@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {useParams, Link} from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
 import axios from 'axios';
 import {Grid, Box, Typography, CircularProgress, Container, CardMedia, Button} from '@mui/material';
-import Spinner from '../../Spinner/Spinner';
+import {Spinner} from '../../../components/';
 import useStyles from './styles';
 
 const CatItem = () => {
   const classes = useStyles();
+  const mounted = useRef(false)
   const {id} = useParams();
   const lowercase = id.toLocaleLowerCase()
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -20,21 +21,26 @@ const CatItem = () => {
 
 
   useEffect(() => {
-    setImgLoading(true)
-    const getImg = async() => {
-      try {
-        const res = await axios.get(`${BASE_URL}/images/search?breed_ids=${id}&limit`);
-        setImages(res.data);
-      } catch(e) {
-        console.log(e)
-      }
+    if(!mounted.current) {
+      const getImg = async() => {
+        setImgLoading(true)
+        try {
+          const res = await axios.get(`${BASE_URL}/images/search?breed_ids=${id}&limit`);
+          setImages(res.data);
+          setImgLoading(false)
+        } catch(e) {
+          console.log(e)
+        }
+      }  
+      getImg();
     }
 
-    setTimeout(() => {
-      setImgLoading(false);
-    }, 1500)
 
-    getImg();
+    // cleanup
+    return () => {
+      mounted.current = true;
+    }
+
   }, [id])
 
 

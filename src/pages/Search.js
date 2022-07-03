@@ -1,21 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import * as api from '../api/cat';
 import {Container, Grid, Typography} from '@mui/material';
-import Pagination from '../components/Pagination/Pagination'
-import CardSekeleton from '../components/Skeletons/CardSekeleton';
-import CardCats from '../components/Cats/CardCats';
+import {Pagination, CardSekeleton, CardCats, SearchBar} from '../components'
 import useFetch from '../hooks/useFetch';
 import useDebounce from '../hooks/useDebounce';
 import usePagination from '../hooks/usePagination';
-import SearchBar from '../components/SearchBar/SearchBar';
 import useStyles from '../components/Cats/styles';
+
 const Search = () => {
+  
   const classes = useStyles();
   const navigate = useNavigate();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const {data, isLoading, setLoading, errors} = useFetch(`${BASE_URL}/breeds`);
-
+  const {data, isLoading, setLoading} = useFetch(`${BASE_URL}/breeds`);
   // paginaton 
   const [page, setPage] = useState(1);
   const PER_PAGE = 10;
@@ -43,6 +41,9 @@ const Search = () => {
       searchQuery();
     }
 
+    // return () => {
+    //   mounted.current = true;
+    // }
   }, [debounceQuery])
 
 

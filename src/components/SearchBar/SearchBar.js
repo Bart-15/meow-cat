@@ -37,12 +37,6 @@ const SearchBar = ({query, setQuery, queryResult, searchCat}) => {
                   onChange={(e) => setQuery(e.target.value)}
                   InputProps={{
                     ...params.InputProps,
-                    // type: 'search',
-                    //   endAdornment: (
-                    //     <InputAdornment variant="standard" position="end">
-                    //       <SearchIcon color="success" />
-                    //     </InputAdornment>
-                    //   ),
                     }}
                 />
               }

@@ -1,7 +1,8 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import * as cat from '../api/cat';
 
 const useFetch = (url) => {
+    const mounted = useRef(false)
     const [data, setData] = useState([]);
     const [errors, setErrors] = useState({});
     const [isLoading, setLoading] = useState(false);
@@ -23,7 +24,6 @@ const useFetch = (url) => {
                 setErrors(errors)
             }
       
-
             setLoading(false)
             setData(res.data);
         }catch(e) {
@@ -32,7 +32,15 @@ const useFetch = (url) => {
     }
 
     useEffect(() => {
-        fetchData();
+        if(!mounted.current) {
+            fetchData();
+        }
+
+        // cleanup 
+        return () => {
+            mounted.current = true;
+        }
+
     },[])
     
 

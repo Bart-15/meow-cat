@@ -1,6 +1,5 @@
 import React from 'react'
 import {Card, CardContent, Typography, Container} from '@mui/material'
-import defaultImg from '../../assets/images/4-11.jpg'
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import useStyles from '../Cats/styles';

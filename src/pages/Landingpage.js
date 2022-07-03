@@ -6,6 +6,8 @@ import useStyles from './styles';
 const Landingpage = () => {
   const classes = useStyles();
 
+
+
   return (
     <Box className={classes.root} component="div">
       <Box className={classes.contentContainer} component="div"> 
