@@ -9,9 +9,9 @@ function App() {
   return (
     <div>
       <CssBaseline />
-      <Router basename='/'>
+      <Router>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route exact path="/" element={<LandingPage />} />
           <Route path="/search" element={<Search />}></Route>
           <Route path="/search/cat/:id" element={<CatItem />}></Route>
         </Routes>
