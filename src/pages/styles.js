@@ -9,14 +9,18 @@ export default makeStyles((theme) => ({
        margin:'0 auto',
        padding:'150px 20px',
        height: '100vh',
+       position:'relative',
 
-       [theme.breakpoints.up('md')] : {
-        padding:'300px 20px'
-       }
     }, 
     
     contentContainer : {
-      transision:'.4s ease-in-out'
+      transision:'.4s ease-in-out',
+      [theme.breakpoints.up('md')] : {
+        margin:0,
+        position:'absolute',
+        top:'50%',
+        transform:'translateY(-50%)'
+      }
     },
 
     title : {

@@ -61,10 +61,7 @@ const Search = () => {
   } 
 
   const searchCat = (e, value) => {
-    const {id} = value;
-    if(e.keyCode === 13) {
-     return navigate(`/search/cat/${query}`);
-    }    
+    const {id} = value;   
     navigate(`/search/cat/${id}`);
   }
 

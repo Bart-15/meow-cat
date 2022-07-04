@@ -25,7 +25,7 @@ const CatItem = () => {
       const getImg = async() => {
         setImgLoading(true)
         try {
-          const res = await axios.get(`${BASE_URL}/images/search?breed_ids=${id}&limit`);
+          const res = await axios.get(`${BASE_URL}/images/search?breed_ids=${id}`);
           setImages(res.data);
           setImgLoading(false)
         } catch(e) {
